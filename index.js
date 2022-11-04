@@ -1,4 +1,6 @@
+const { RTMClient } = require("@slack/rtm-api");
 const fs = require("fs");
+
 let token;
 
 try {
@@ -7,6 +9,29 @@ try {
   console.error(err);
 }
 
-console.log(token);
+const rtm = new RTMClient(token);
+rtm.start();
 
-console.log("hello!!");
+const greeting = require("./greeting");
+const square = require("./square");
+
+rtm.on("message", function (message) {
+  const { channel } = message;
+  const { text } = message;
+
+  if (!isNaN(text)) {
+    square(rtm, text, channel);
+  } else {
+    switch (text) {
+      case "hi":
+        greeting(rtm, channel);
+        break;
+      default:
+        rtm.sendMessage("I am alive", channel);
+    }
+  }
+  // if (text == 'hello')
+  //     rtm.sendMessage('hi', channel);
+  // else
+  //     rtm.sendMessage('what?', channel);
+});

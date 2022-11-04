@@ -13,5 +13,6 @@ module.exports = {
     "no-var": "warn",
     "no-unused-vars": "off",
     "prefer-cons": "off",
+    "no-restricted-globals": "off",
   },
 };
