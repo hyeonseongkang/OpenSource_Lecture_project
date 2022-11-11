@@ -9,7 +9,12 @@ module.exports = {
     ecmaVersion: "latest",
   },
   rules: {
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
+    ],
     "no-var": "warn",
     "no-unused-vars": "off",
     "prefer-cons": "off",
