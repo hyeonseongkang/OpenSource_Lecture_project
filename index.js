@@ -23,7 +23,7 @@ rtm.on("message", function (message) {
     square(rtm, text, channel);
   } else {
     switch (text) {
-      case "hi":
+      case "Hi":
         greeting(rtm, channel);
         break;
       default:
