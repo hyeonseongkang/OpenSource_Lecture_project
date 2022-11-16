@@ -12,7 +12,7 @@ try {
 const rtm = new RTMClient(token);
 rtm.start();
 
-const greeting = require("./greeting");
+const { greeting } = require("./greeting");
 const square = require("./square");
 
 rtm.on("message", function (message) {
@@ -30,8 +30,4 @@ rtm.on("message", function (message) {
         rtm.sendMessage("I am alive", channel);
     }
   }
-  // if (text == 'hello')
-  //     rtm.sendMessage('hi', channel);
-  // else
-  //     rtm.sendMessage('what?', channel);
 });
