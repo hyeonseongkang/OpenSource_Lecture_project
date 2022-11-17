@@ -13,6 +13,7 @@ const rtm = new RTMClient(token);
 rtm.start();
 
 const { greeting } = require("./greeting");
+const { getTodayMenu } = require("./todayMenu");
 const square = require("./square");
 
 rtm.on("message", function (message) {
@@ -26,6 +27,11 @@ rtm.on("message", function (message) {
       case "Hi":
         greeting(rtm, channel);
         break;
+
+      case "오늘 밥 뭐야":
+        getTodayMenu(rtm, channel);
+        break;
+
       default:
         rtm.sendMessage("I am alive", channel);
     }
