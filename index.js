@@ -13,7 +13,9 @@ const rtm = new RTMClient(token);
 rtm.start();
 
 const { greeting } = require("./greeting");
+
 const { getTodayMenu, getMenuEvaluation } = require("./todayMenu");
+
 const square = require("./square");
 
 rtm.on("message", function (message) {

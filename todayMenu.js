@@ -3,6 +3,7 @@ const { spawn } = require("child_process");
 const result = spawn("python", ["menu_crawler.py"]);
 
 let menu = "";
+
 let count = 0;
 const evalutions = ["☆☆☆", "★☆☆", "★★☆", "★★★"];
 
