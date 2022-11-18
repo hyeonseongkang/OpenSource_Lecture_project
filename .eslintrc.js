@@ -15,11 +15,14 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
-    "no-var": "warn",
+    "no-var": "off",
     "no-unused-vars": "off",
     "prefer-cons": "off",
     "no-undef": "off",
     "no-restricted-globals": "off",
+    
+    "no-restricted-syntax": "off",
     "prefer-destructuring": "off",
+    "vars-on-top": "off",
   },
 };
