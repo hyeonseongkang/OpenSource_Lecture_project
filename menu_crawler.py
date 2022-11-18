@@ -34,7 +34,7 @@ for i in range(5):
     menu_list.append(save_text)
 
 if today >= 5:
-    print("운영 X")
+    print("오늘은 운영하지 않습니다.")
 else:
-    print(menu_list[today])
+    print("\"" + menu_list[today] + "\"")
 

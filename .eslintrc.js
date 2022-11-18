@@ -20,5 +20,6 @@ module.exports = {
     "prefer-cons": "off",
     "no-undef": "off",
     "no-restricted-globals": "off",
+    "prefer-destructuring": "off",
   },
 };
