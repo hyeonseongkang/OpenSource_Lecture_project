@@ -25,5 +25,6 @@ module.exports = {
     "prefer-destructuring": "off",
     "vars-on-top": "off",
     "no-case-declarations": "off",
+    "import/order": "off",
   },
 };
