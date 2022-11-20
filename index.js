@@ -1,12 +1,10 @@
 const { RTMClient } = require("@slack/rtm-api");
 const fs = require("fs");
-
 const { spawn } = require("child_process");
 
-const result = spawn("python", ["menu_crawler.py"]);
-
+const result = spawn("python", ["menuCrawler.py"]);
+result.stdout.on("data", function (data) {});
 let token;
-let todayMenuText;
 
 try {
   token = fs.readFileSync("./token").toString("utf-8");
@@ -19,7 +17,7 @@ rtm.start();
 
 const { greeting } = require("./greeting");
 
-const { getTodayMenu, getMenuEvaluation } = require("./todayMenu");
+const { sendTodayMenu, sendMenuEvaluation } = require("./todayMenu");
 
 const square = require("./square");
 
@@ -36,13 +34,8 @@ rtm.on("message", function (message) {
         break;
 
       case "오늘 밥 뭐야":
-        try {
-          todayMenuText = fs.readFileSync("./todaymenu.txt").toString("utf-8");
-        } catch (err) {
-          console.error(err);
-        }
-        getTodayMenu(rtm, channel, todayMenuText);
-        getMenuEvaluation(rtm, channel, todayMenuText);
+        sendTodayMenu(rtm, channel);
+        sendMenuEvaluation(rtm, channel);
         break;
 
       default:
