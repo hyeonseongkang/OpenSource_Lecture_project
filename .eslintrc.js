@@ -20,7 +20,7 @@ module.exports = {
     "prefer-cons": "off",
     "no-undef": "off",
     "no-restricted-globals": "off",
-    
+    "guard-for-in": "off",
     "no-restricted-syntax": "off",
     "prefer-destructuring": "off",
     "vars-on-top": "off",
