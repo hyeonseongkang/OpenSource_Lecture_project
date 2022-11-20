@@ -21,6 +21,8 @@ const { sendTodayMenu, sendMenuEvaluation } = require("./todayMenu");
 
 const square = require("./square");
 
+const { deptInfo } = require("./deptInfo");
+
 rtm.on("message", function (message) {
   const { channel } = message;
   const { text } = message;
@@ -39,7 +41,8 @@ rtm.on("message", function (message) {
         break;
 
       default:
-        rtm.sendMessage("I am alive", channel);
+        if (deptInfo(rtm, channel, text))
+          rtm.sendMessage("I am alive", channel);
     }
   }
 });

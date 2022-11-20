@@ -24,6 +24,7 @@ module.exports = {
     "no-restricted-syntax": "off",
     "prefer-destructuring": "off",
     "vars-on-top": "off",
+    "no-case-declarations": "off",
     "import/order": "off",
   },
 };
