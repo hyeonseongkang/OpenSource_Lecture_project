@@ -28,7 +28,6 @@ for i in range(5):
     temp = columns[i].find_all("li")
     save_text = ""
     first = True
-    print(len(temp))
     for j in temp:
         text = j.text
         count += 1
@@ -42,7 +41,7 @@ for i in range(5):
                 else:
                     save_text += text + ", " 
     menu_list.append(save_text)
-
+# today = 4
 if today >= 5:
     #print("오늘은 운영하지 않습니다.")
     file.write("오늘은 운영하지 않습니다.")
