@@ -9,7 +9,7 @@ today = datetime.today().weekday()
 # if now.hour + 9 >= 24:
 #     today += 1
 
-file = open('./todaymenu.txt', 'w')
+file = open('./todaymenu.txt', 'w', encoding="UTF-8")
 
 webPage = requests.get("https://sobi.jbnu.ac.kr/menu/week_menu.php")
 webPage.encoding = 'UTF-8'
