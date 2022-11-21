@@ -1,8 +1,6 @@
 name: Feature Test
 
 on:
-  push:
-    branches: [dev*]
   pull_request:
     branches: [main, dev*]
 
@@ -28,5 +26,6 @@ jobs:
           npm install chai -g
           mocha greeting.spec.js
           mocha todayMenu.spec.js
+          mocha deptInfo.spec.js
         env:
           CI: true
