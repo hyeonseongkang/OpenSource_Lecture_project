@@ -6,7 +6,8 @@ const deptInfo = function (rtm, channel, text) {
 
   for (var i = 0; i < arr.length; i += 2) {
     if (arr[i].trim() === text.trim()) {
-      rtm.sendMessage(arr[i + 1], channel);
+      const deptLocated = arr[i + 1];
+      rtm.sendMessage(deptLocated, channel);
       return false;
     }
   }
