@@ -19,8 +19,6 @@ const { greeting } = require("./greeting");
 
 const { sendTodayMenu, sendMenuEvaluation } = require("./todayMenu");
 
-const square = require("./square");
-
 const { deptInfo } = require("./deptInfo");
 
 rtm.on("message", function (message) {

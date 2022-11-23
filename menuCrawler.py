@@ -41,7 +41,7 @@ for i in range(5):
                 else:
                     save_text += text + ", " 
     menu_list.append(save_text)
-# today = 4
+#today = 4
 if today >= 5:
     #print("오늘은 운영하지 않습니다.")
     file.write("오늘은 운영하지 않습니다.")

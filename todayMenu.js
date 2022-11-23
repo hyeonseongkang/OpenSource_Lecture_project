@@ -5,7 +5,7 @@ const keyWords = ["고기", "초밥", "갈비", "볶음"];
 const fs = require("fs");
 
 try {
-  todayMenuText = fs.readFileSync("./todaymenu.txt").toString("utf-8");
+  todayMenuText = fs.readFileSync("./todayMenu.txt").toString("utf-8");
 } catch (err) {
   console.error(err);
 }
