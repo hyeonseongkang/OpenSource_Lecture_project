@@ -1,1 +1,0 @@
-# OpenSource_Lecture_project
