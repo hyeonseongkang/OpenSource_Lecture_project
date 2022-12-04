@@ -9,7 +9,7 @@ today = datetime.today().weekday()
 # if now.hour + 9 >= 24:
 #     today += 1
 
-today_menu = open('./todaymenu.txt', 'w', encoding="UTF-8")
+today_menu = open('./todayMenu.txt', 'w', encoding="UTF-8")
 
 weekly_menu = open('./weeklyMenu.txt', 'w', encoding="UTF-8")
 
