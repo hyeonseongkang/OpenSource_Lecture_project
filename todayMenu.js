@@ -1,11 +1,14 @@
 const evalutions = ["☆☆☆", "★☆☆", "★★☆", "★★★"];
 
-const keyWords = ["고기", "초밥", "갈비", "볶음"];
+const weekly = ["월 - ", "화 - ", "수 - ", "목 - ", "금 - "];
+
+const keyWords = ["고기", "초밥", "갈비", "볶음", "튀김"];
 
 const fs = require("fs");
 
 try {
   todayMenuText = fs.readFileSync("./todayMenu.txt").toString("utf-8");
+  weeklyMenuText = fs.readFileSync("./weeklyMenu.txt").toString("utf-8");
 } catch (err) {
   console.error(err);
 }
@@ -20,11 +23,11 @@ const getTodayMenuText = function () {
 };
 
 const getMenuEvaluationCount = function (text) {
-  const todaymenu = text.split(",");
+  const todaymenu = text.split(" ");
   let count = 0;
   for (var i in todaymenu) {
     for (var j in keyWords) {
-      if (todaymenu[i].includes(keyWords[j], 2)) {
+      if (todaymenu[i].includes(keyWords[j])) {
         count += 1;
       }
     }
@@ -58,9 +61,27 @@ const sendMenuEvaluation = function (rtm, channel) {
   rtm.sendMessage(sendMessage, channel);
 };
 
+const sendWeeklyMenuEvaluation = function (rtm, channel) {
+  var sendMessage = "";
+  const arr = weeklyMenuText.split("\n");
+  for (var i = 0; i < arr.length - 1; i += 1) {
+    if (i === arr.length - 1) {
+      sendMessage += weekly[i] + evalutions[getMenuEvaluationCount(arr[i])];
+    } else {
+      sendMessage +=
+        weekly[i] + evalutions[getMenuEvaluationCount(arr[i])] + "\n";
+    }
+  }
+  if (sendMessage === "") {
+    return;
+  }
+  rtm.sendMessage(sendMessage, channel);
+};
+
 module.exports = {
   sendTodayMenu,
   sendMenuEvaluation,
+  sendWeeklyMenuEvaluation,
   getTodayMenuText,
   getMenuEvaluationCount,
   getMenuEvaluationText,
