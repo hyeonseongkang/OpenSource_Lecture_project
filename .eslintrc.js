@@ -26,5 +26,6 @@ module.exports = {
     "vars-on-top": "off",
     "no-case-declarations": "off",
     "import/order": "off",
+    "no-loop-func": "off",
   },
 };

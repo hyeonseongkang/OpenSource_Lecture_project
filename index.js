@@ -21,6 +21,8 @@ const { sendTodayMenu, sendMenuEvaluation } = require("./todayMenu");
 
 const { deptInfo } = require("./deptInfo");
 
+let numTemp = false;
+
 rtm.on("message", function (message) {
   const { channel } = message;
   const { text } = message;
@@ -38,9 +40,18 @@ rtm.on("message", function (message) {
         sendMenuEvaluation(rtm, channel);
         break;
 
+      case "학과 안내":
+        numTemp = true;
+        rtm.sendMessage("학과를 입력하세요", channel);
+        break;
+
       default:
-        if (deptInfo(rtm, channel, text))
+        if (numTemp === false) {
           rtm.sendMessage("I am alive", channel);
+        } else {
+          deptInfo(rtm, channel, text);
+          numTemp = false;
+        }
     }
   }
 });
