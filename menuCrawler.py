@@ -5,9 +5,6 @@ from datetime import datetime
 now = datetime.now()
 today = datetime.today().weekday()
 
-# UTC 기준 
-# if now.hour + 9 >= 24:
-#     today += 1
 
 today_menu = open('./todayMenu.txt', 'w', encoding="UTF-8")
 
