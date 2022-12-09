@@ -1,141 +1,77 @@
 const fs = require("fs");
 
-var spawn = require("child_process").spawn;
-
 let result;
-let numTemp = -2;
-let strTemp2;
-let deptLocated = "";
-let strTemp;
+var index;
+var current = 10;
+var pythonShell = require("python-shell");
 
+var tempArray = [];
+
+const dat = fs.readFileSync("./dept.txt", "utf8");
+const arr = dat.split(/-|\n/);
+
+var location = [];
+
+for (var a = 1; a < arr.length; a += 2) {
+  location.push(arr[a]);
+}
 const getDeptInfo = function (text) {
-  const dat = fs.readFileSync("./dept.txt", "utf8");
-  const arr = dat.split(/-|\n/);
-  var cond = false;
+  tempArray = [];
   for (var i = 0; i < arr.length; i += 2) {
     const arrTemp = arr[i].toLowerCase();
-    // const textTemp = "cimputersinc";
     const textTemp = text.toLowerCase();
-    result = spawn("py", [
-      "calcStringDistance.py",
-      textTemp.trim(),
-      arrTemp.trim(),
-    ]);
 
-    strTemp2 = arr[i + 1];
-    // eslint-disable-next-line no-loop-func
-    if (cond) {
-      break;
-    }
-    console.log(strTemp2);
-    result.stdout.on("data", (data) => {
-      const dataTemp = data.toString().replace(/\n/g, "").trim();
-      // console.log(dataTemp);
-      if (Number(dataTemp) > 1) {
-        numTemp = Number(dataTemp);
-        strTemp = strTemp2;
-        cond = true;
-        console.log("i값 : ");
-        console.log(i);
+    var options = {
+      mode: "text",
+      pythonPath: "",
+      pythonOptions: ["-u"],
+      scriptPath: "",
+      args: [textTemp.trim(), arrTemp.trim()],
+    };
+
+    pythonShell.PythonShell.run(
+      "./calcStringDistance.py",
+      options,
+      function (err, results) {
+        if (err) throw err;
+        tempArray.push(results);
       }
-      if (
-        Number(dataTemp) !== -1 &&
-        (Number(dataTemp) < numTemp || numTemp === -2)
-      ) {
-        numTemp = Number(dataTemp);
-        strTemp = strTemp2;
-        cond = true;
-        console.log(strTemp);
-      }
-    });
+    );
   }
-  deptLocated = strTemp;
-  return deptLocated;
 };
-const deptInfo = function (rtm, channel, text) {
-  const dept = getDeptInfo(text);
-  console.log(dept);
-  if (numTemp !== -1) {
-    if (numTemp === 0) {
-      rtm.sendMessage(dept, channel);
-    } else {
-      let tempMessage = "이걸 찾으셨나요? : ";
-      tempMessage += dept;
-      rtm.sendMessage(tempMessage, channel);
+
+const getMinIndex = function (array) {
+  var tempIndex = -1;
+  var tempArray2 = array;
+  for (var i = 0; i < tempArray2.length; i += 1) {
+    if (Number(tempArray2[i]) === -1) {
+      tempArray2[i] = 100000;
     }
-    numTemp = -2;
-  } else {
-    rtm.sendMessage("db에 존재하지 않습니다.", channel);
   }
+  var minValue = tempArray2[0];
+  for (var j = 0; j < tempArray2.length; j += 1) {
+    if (tempArray2[j] < minValue) {
+      minValue = tempArray2[j];
+      tempIndex = j;
+    }
+  }
+
+  return tempIndex;
+};
+
+const deptInfo = function (rtm, channel, text) {
+  getDeptInfo(text);
+  setTimeout(function () {
+    var temp = Number(getMinIndex(tempArray));
+    if (temp === -1) {
+      rtm.sendMessage("db에 존재하지 않습니다.", channel);
+    } else {
+      rtm.sendMessage("이걸 찾으셨나요? : " + location[temp], channel);
+    }
+  }, 1000);
 };
 
 module.exports = {
   deptInfo,
   getDeptInfo,
 };
-
-/*
-const fs = require("fs");
-
-var spawn = require("child_process").spawn;
-
-let result;
-let numTemp = -2;
-let strTemp2;
-let deptLocated = "";
-let strTemp;
-
-const getDeptInfo = function (text) {
-  const dat = fs.readFileSync("./dept.txt", "utf8");
-  const arr = dat.split(/-|\n/);
-
-  for (var i = 0; i < arr.length; i += 2) {
-    const arrTemp = arr[i].toLowerCase();
-    // const textTemp = "cimputersinc";
-    const textTemp = text.toLowerCase();
-    result = spawn("py", [
-      "calcStringDistance.py",
-      textTemp.trim(),
-      arrTemp.trim(),
-    ]);
-
-    strTemp2 = arr[i + 1];
-    // eslint-disable-next-line no-loop-func
-    result.stdout.on("data", (data) => {
-      const dataTemp = data.toString().replace(/\n/g, "").trim();
-      if (
-        Number(dataTemp) !== -1 &&
-        (Number(dataTemp) < numTemp || numTemp === -2)
-      ) {
-        numTemp = Number(dataTemp);
-        strTemp = strTemp2;
-        console.log(strTemp);
-      }
-    });
-  }
-  deptLocated = strTemp;
-  return deptLocated;
-};
-const deptInfo = function (rtm, channel, text) {
-  const dept = getDeptInfo(text);
-  console.log(dept);
-  if (numTemp !== -1) {
-    if (numTemp === 0) {
-      rtm.sendMessage(dept, channel);
-    } else {
-      let tempMessage = "이걸 찾으셨나요? : ";
-      tempMessage += dept;
-      rtm.sendMessage(tempMessage, channel);
-    }
-    numTemp = -2;
-  } else {
-    rtm.sendMessage("db에 존재하지 않습니다.", channel);
-  }
-};
-
-module.exports = {
-  deptInfo,
-  getDeptInfo,
-};
-
-*/
