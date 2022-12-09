@@ -28,5 +28,6 @@ module.exports = {
     "import/order": "off",
     "no-loop-func": "off",
     "prefer-template": "off",
+    "no-continue": "off",
   },
 };

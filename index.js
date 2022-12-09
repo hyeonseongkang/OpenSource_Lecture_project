@@ -30,36 +30,30 @@ let numTemp = false;
 rtm.on("message", function (message) {
   const { channel } = message;
   const { text } = message;
+  switch (text) {
+    case "Hi":
+      greeting(rtm, channel);
+      break;
 
-  if (!isNaN(text)) {
-    square(rtm, text, channel);
-  } else {
-    switch (text) {
-      case "Hi":
-        greeting(rtm, channel);
-        break;
+    case "오늘 밥 뭐야":
+      sendTodayMenu(rtm, channel);
+      sendMenuEvaluation(rtm, channel);
+      break;
 
-      case "오늘 밥 뭐야":
-        sendTodayMenu(rtm, channel);
-        sendMenuEvaluation(rtm, channel);
-        break;
+    case "학과 안내":
+      numTemp = true;
+      rtm.sendMessage("학과를 입력하세요", channel);
+      break;
+    case "이번주 뭐 나와":
+      sendWeeklyMenuEvaluation(rtm, channel);
+      break;
 
-      case "학과 안내":
-        numTemp = true;
-        rtm.sendMessage("학과를 입력하세요", channel);
-        break;
-        
-      case "이번주 뭐 나와":
-        sendWeeklyMenuEvaluation(rtm, channel);
-        break;
-
-      default:
-        if (numTemp === false) {
-          rtm.sendMessage("I am alive", channel);
-        } else {
-          deptInfo(rtm, channel, text);
-          numTemp = false;
-        }
-    }
+    default:
+      if (numTemp === false) {
+        rtm.sendMessage("I am alive", channel);
+      } else {
+        deptInfo(rtm, channel, text);
+        numTemp = false;
+      }
   }
 });
