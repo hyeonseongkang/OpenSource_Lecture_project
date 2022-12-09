@@ -9,7 +9,9 @@ today = datetime.today().weekday()
 # if now.hour + 9 >= 24:
 #     today += 1
 
-file = open('./todaymenu.txt', 'w', encoding="UTF-8")
+today_menu = open('./todayMenu.txt', 'w', encoding="UTF-8")
+
+weekly_menu = open('./weeklyMenu.txt', 'w', encoding="UTF-8")
 
 webPage = requests.get("https://sobi.jbnu.ac.kr/menu/week_menu.php")
 webPage.encoding = 'UTF-8'
@@ -23,6 +25,7 @@ columns = rows.find_all("td")
 
 
 menu_list = []
+weekly_menu_text = ""
 for i in range(5):
     count = 0
     temp = columns[i].find_all("li")
@@ -31,22 +34,32 @@ for i in range(5):
     for j in temp:
         text = j.text
         count += 1
+        
         if len(text) != 0:
-            if first:
-                # save_text = text
-                first = False
-            else :
-                if len(temp) == count:
-                    save_text += text
-                else:
-                    save_text += text + ", " 
+            #print(text)
+            if len(temp) == count:
+                save_text += text
+            else:
+                save_text += text + " "
+            # if first:
+            #     # save_text = text
+            #     first = False
+            # else :
+            #     if len(temp) == count:
+            #         save_text += text
+            #     else:
+            #         save_text += text + ", " 
+    print(save_text)
+    weekly_menu_text += save_text + "\n"
     menu_list.append(save_text)
 #today = 4
+weekly_menu.write(weekly_menu_text)
 if today >= 5:
     #print("오늘은 운영하지 않습니다.")
-    file.write("오늘은 운영하지 않습니다.")
+    today_menu.write("오늘은 운영하지 않습니다.")
 else:
     #print("\"" + menu_list[today] + "\"")
-    file.write("\"" + menu_list[today] + "\"")
-file.close
+    today_menu.write("\"" + menu_list[today] + "\"")
+today_menu.close
+weekly_menu.close
 

@@ -27,5 +27,6 @@ module.exports = {
     "no-case-declarations": "off",
     "import/order": "off",
     "no-loop-func": "off",
+    "prefer-template": "off",
   },
 };

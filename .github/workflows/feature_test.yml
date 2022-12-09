@@ -25,7 +25,6 @@ jobs:
           npm install mocha -g
           npm install chai -g
           mocha greeting.spec.js
-          mocha todayMenu.spec.js
           mocha deptInfo.spec.js
         env:
           CI: true
