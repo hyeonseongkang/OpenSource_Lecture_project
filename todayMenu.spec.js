@@ -9,7 +9,7 @@ const fs = require("fs");
 
 let todayMenuText;
 try {
-  todayMenuText = fs.readFileSync("./todaymenu.txt").toString("utf-8");
+  todayMenuText = fs.readFileSync("./todayMenu.txt").toString("utf-8");
 } catch (err) {
   console.error(err);
 }

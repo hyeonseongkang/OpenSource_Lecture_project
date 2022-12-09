@@ -17,7 +17,11 @@ rtm.start();
 
 const { greeting } = require("./greeting");
 
-const { sendTodayMenu, sendMenuEvaluation } = require("./todayMenu");
+const {
+  sendTodayMenu,
+  sendMenuEvaluation,
+  sendWeeklyMenuEvaluation,
+} = require("./todayMenu");
 
 const { deptInfo } = require("./deptInfo");
 
@@ -43,6 +47,10 @@ rtm.on("message", function (message) {
       case "학과 안내":
         numTemp = true;
         rtm.sendMessage("학과를 입력하세요", channel);
+        break;
+        
+      case "이번주 뭐 나와":
+        sendWeeklyMenuEvaluation(rtm, channel);
         break;
 
       default:
