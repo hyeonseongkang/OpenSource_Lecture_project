@@ -10,6 +10,7 @@ def calcDistance(str1, str2):
         print(dist)
     else:
         print(-1)
+        
 
 if __name__ == '__main__':    
     calcDistance(sys.argv[1], sys.argv[2])
