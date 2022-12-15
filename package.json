@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/hyeonseongkang/OpenSource_Lecture_project#readme",
   "devDependencies": {
+    "chai": "^4.3.7",
     "eslint": "^8.26.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
@@ -32,6 +33,7 @@
   },
   "dependencies": {
     "@slack/rtm-api": "^6.0.0",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "python-shell": "^3.0.1"
   }
 }
